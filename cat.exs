@@ -1,8 +1,8 @@
 #!/usr/bin/env elixir
 
 defmodule Cat do
-  def main() do
-    case System.argv() do
+  def main(args) do
+    case args do
       [file] -> File.stream!(file, [:read], :line)
       [] -> IO.stream(:stdio, :line)
     end
@@ -11,4 +11,4 @@ defmodule Cat do
   end
 end
 
-Cat.main()
+System.argv() |> Cat.main()

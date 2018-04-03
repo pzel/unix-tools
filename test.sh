@@ -22,6 +22,20 @@ test_cat_copies_stdin() {
     assert_equal "$unix" "$exs"
 }
 
+test_grep_finds_word_in_file() {
+    unix=$(grep unix README.md)
+    exs=$(./grep.exs unix README.md)
+    assert_equal "$unix" "$exs"
+}
+
+test_grep_finds_word_in_stdin() {
+    unix=$(echo -e "hello\nunix\ntools" | grep unix)
+    exs=$(echo -e "hello\nunix\ntools" | ./grep.exs unix)
+    assert_equal "$unix" "$exs"
+}
+
+
 test_cat_cats_file
 test_cat_copies_stdin
-
+test_grep_finds_word_in_file
+test_grep_finds_word_in_stdin
