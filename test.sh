@@ -34,8 +34,14 @@ test_grep_finds_word_in_stdin() {
     assert_equal "$unix" "$exs"
 }
 
+test_grep_finds_word_in_multiple_files() {
+    unix=$(grep unix *)
+    exs=$(./grep.exs unix *)
+    assert_equal "$unix" "$exs"
+}
 
-test_cat_cats_file
-test_cat_copies_stdin
-test_grep_finds_word_in_file
-test_grep_finds_word_in_stdin
+#test_cat_cats_file
+#test_cat_copies_stdin
+#test_grep_finds_word_in_file
+#test_grep_finds_word_in_stdin
+test_grep_finds_word_in_multiple_files
