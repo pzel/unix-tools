@@ -9,7 +9,7 @@ defmodule Grep do
       [pattern, path] ->
         File.stream!(path, [:read], :line)
         |> process_one(pattern)
-      [pattern | paths ] ->
+      [pattern | paths] ->
         Enum.map(paths, fn p -> {p, File.read!(p)} end)
         |> process_many(pattern)
     end
@@ -17,7 +17,7 @@ defmodule Grep do
 
   defp process_one(stream, pattern) do
     stream
-    |> Stream.filter(&String.contains?(&1, pattern))
+    |> Stream.filter(&pattern_matches?(pattern, &1))
     |> Stream.map(&IO.write/1)
     |> Stream.run()
   end
@@ -32,7 +32,7 @@ defmodule Grep do
 
   defp find_matches(blob, pattern) do
     String.split(blob, "\n")
-    |> Enum.filter(&String.contains?(&1, pattern))
+    |> Enum.filter(&pattern_matches?(pattern, &1))
   end
 
   defp print_matches({_, []}), do: :ok
@@ -43,6 +43,9 @@ defmodule Grep do
     end)
   end
 
+  defp pattern_matches?(pattern, subject) do
+    Regex.match?(Regex.compile!(pattern), subject)
+  end
 
 end
 

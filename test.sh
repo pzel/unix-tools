@@ -40,8 +40,15 @@ test_grep_finds_word_in_multiple_files() {
     assert_equal "$unix" "$exs"
 }
 
-#test_cat_cats_file
-#test_cat_copies_stdin
-#test_grep_finds_word_in_file
-#test_grep_finds_word_in_stdin
+test_grep_finds_match_in_file() {
+    unix=$(grep 'u..x' README.md)
+    exs=$(./grep.exs 'u..x' README.md)
+    assert_equal "$unix" "$exs"
+}
+
+test_cat_cats_file
+test_cat_copies_stdin
+test_grep_finds_word_in_file
+test_grep_finds_word_in_stdin
 test_grep_finds_word_in_multiple_files
+test_grep_finds_match_in_file
