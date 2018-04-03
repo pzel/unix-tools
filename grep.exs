@@ -23,10 +23,11 @@ defmodule Grep do
   end
 
   defp process_many(annotated_files, pattern) do
-    annotated_files
-    |> Enum.map(fn {annot, contents} ->
-      {annot, find_matches(contents, pattern)}
-    end)
+    Task.async_stream(annotated_files,
+      fn {annot, contents} ->
+        {annot, find_matches(contents, pattern)}
+      end)
+    |> Enum.to_list()
     |> Enum.each(&print_matches/1)
   end
 
@@ -35,10 +36,9 @@ defmodule Grep do
     |> Enum.filter(&pattern_matches?(pattern, &1))
   end
 
-  defp print_matches({_, []}), do: :ok
-  defp print_matches({path, matches}) do
-    matches
-    |> Enum.each(fn match ->
+  defp print_matches({:ok, {_, []}}), do: :ok
+  defp print_matches({:ok, {path, matches}}) do
+    Enum.each(matches, fn match ->
       IO.write(:stdio, "#{path}:#{match}\n")
     end)
   end
