@@ -9,6 +9,12 @@ assert_equal() {
     fi
 }
 
+test_true_returns_true() {
+    unix=$(true && echo "$?")
+    exs=$(./true.exs && echo "$?")
+    assert_equal "$unix" "$exs" $LINENO
+}
+
 test_cat_cats_file() {
     unix=$(cat ./README.md)
     exs=$(./cat.exs ./README.md)
@@ -51,6 +57,7 @@ test_curl_works_on_http_site() {
     assert_equal "$unix" "$exs" $LINENO
 }
 
+test_true_returns_true
 test_cat_cats_file
 test_cat_copies_stdin
 test_grep_finds_word_in_file
