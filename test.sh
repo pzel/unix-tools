@@ -28,8 +28,8 @@ test_cat_copies_stdin() {
 }
 
 test_grep_finds_word_in_file() {
-    unix=$(grep unix README.md)
-    exs=$(./grep.exs unix README.md)
+    unix=$(grep grep README.md)
+    exs=$(./grep.exs grep README.md)
     assert_equal "$unix" "$exs" $LINENO
 }
 
@@ -40,14 +40,14 @@ test_grep_finds_word_in_stdin() {
 }
 
 test_grep_finds_word_in_multiple_files() {
-    unix=$(grep unix *)
-    exs=$(./grep.exs unix *)
+    unix=$(grep grep *)
+    exs=$(./grep.exs grep *)
     assert_equal "$unix" "$exs" $LINENO
 }
 
 test_grep_finds_match_in_file() {
-    unix=$(grep 'u..x' README.md)
-    exs=$(./grep.exs 'u..x' README.md)
+    unix=$(grep 'g..p' README.md)
+    exs=$(./grep.exs 'g..p' README.md)
     assert_equal "$unix" "$exs" $LINENO
 }
 
