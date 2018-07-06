@@ -10,8 +10,11 @@ tools:
 
 - `true`
 - `false`
+- `echo`
+- `yes`
 - `cat`
 - `grep`
+- `wc`
 - ...and time permitting: `curl`
 
 We'll cover core language sytnax and semantics, and leverage the excellent
@@ -35,9 +38,8 @@ Elixir installation instructions.
 
 # Time & Place
 
-2018-04-DD HH:MM Place Place Place, Vancouver, BC  
-Duration: 90 minutes (2 x 40 minutes + 10 minute break)
-
+2018-06-05 at Unbounce HQ in Vancouver, BC
+Thank you everyone for attending!
 
 
 
